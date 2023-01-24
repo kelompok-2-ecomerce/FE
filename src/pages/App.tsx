@@ -1,9 +1,7 @@
-const Index = () => {
-  return (
-    <div>
-      <h1>Vite + React</h1>
-    </div>
-  );
-};
+import Homepage from "./Homepage";
 
-export default Index;
+function App() {
+  return <Homepage />;
+}
+
+export default App;

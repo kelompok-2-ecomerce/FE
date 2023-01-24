@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import Homepage from "../pages/App";
 import Login from "../pages/auth/login";
 

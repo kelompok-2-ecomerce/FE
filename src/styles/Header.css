@@ -1,0 +1,7 @@
+.bg-image {
+  background-image: url("../assets/header.png");
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
