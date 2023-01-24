@@ -10,10 +10,12 @@ import DeactivateAcc from "../pages/DeactivateAcc";
 import ProfilProduk from "../pages/profilProduk";
 import DetailBarang from "../pages/DetailBarang";
 import ProfilUpload from "../pages/profilUpload";
+import ShoppingCart from "../pages/ShoppingCart";
 import Register from "../pages/auth/register";
 import Transaksi from "../pages/transaksi";
 import Login from "../pages/auth/login";
 import Homepage from "../pages/App";
+
 
 function App() {
   const router = createBrowserRouter([
@@ -54,6 +56,9 @@ function App() {
       element: <DeactivateAcc />,
     },
 
+    {
+      path: "/shoppingCart",
+     element: <ShoppingCart />,
     {
       path: "/register",
       element: <Register />,

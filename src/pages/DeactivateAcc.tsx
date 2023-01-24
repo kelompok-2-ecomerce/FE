@@ -58,7 +58,7 @@ const DeactivateAcc = () => {
               </button>
             </label>
           </label>
-          <Link to="/profile">
+          <Link to="/">
             <button
               className="btn"
               style={{
