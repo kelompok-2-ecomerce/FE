@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 
 import Register from "../pages/auth/register";
+import Transaksi from "../pages/transaksi";
 import Login from "../pages/auth/login";
 import DeactivateAcc from "../pages/DeactivateAcc";
 import DetailBarang from "../pages/DetailBarang";
@@ -17,6 +18,10 @@ function App() {
     {
       path: "/",
       element: <Homepage />,
+    },
+    {
+      path: "/transaksi",
+      element: <Transaksi />,
     },
     {
       path: "/login",
