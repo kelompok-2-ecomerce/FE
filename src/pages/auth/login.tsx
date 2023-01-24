@@ -1,8 +1,5 @@
-
-import Layout from "../../components/Layout";
-import { Link, useNavigate } from "react-router-dom";
-
 import Layout from "../../components/layout";
+import { Link, useNavigate } from "react-router-dom";
 
 import imgLogin from "../../assets/imgLogin.svg";
 import logoApp from "../../assets/logoApp.svg";
