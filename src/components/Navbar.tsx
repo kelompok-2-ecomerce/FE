@@ -63,6 +63,9 @@ const Navbar = () => {
               <li>
                 <a>Logout</a>
               </li>
+              <li>
+                <Link to="/deactivate">Deactivate Account</Link>
+              </li>
             </ul>
           </div>
         </div>
