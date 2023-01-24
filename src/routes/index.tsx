@@ -8,10 +8,13 @@ import AboutmeProfil from "../pages/aboutmeProfil";
 import AboutmeAlamat from "../pages/aboutmeAlamat";
 import DeactivateAcc from "../pages/DeactivateAcc";
 import DetailBarang from "../pages/DetailBarang";
+
+import ShoppingCart from "../pages/ShoppingCart";
 import Register from "../pages/auth/register";
 import Transaksi from "../pages/transaksi";
 import Login from "../pages/auth/login";
 import Homepage from "../pages/App";
+
 
 function App() {
   const router = createBrowserRouter([
@@ -44,6 +47,9 @@ function App() {
       element: <DeactivateAcc />,
     },
 
+    {
+      path: "/shoppingCart",
+     element: <ShoppingCart />,
     {
       path: "/register",
       element: <Register />,

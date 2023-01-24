@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <>
-      <div className="navbar bg-white shadow-md p-10">
+      <div className="navbar bg-white shadow-md p-5">
         <div className="flex-1">
           <Link
             to="/"
@@ -34,11 +34,13 @@ const Navbar = () => {
             >
               <div className="card-body">
                 <span className="font-bold text-lg">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
+                <span className=" text-green-700">Subtotal: $999</span>
                 <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
+                  <Link to="/shoppingCart">
+                    <button className="btn bg-green-700 border-none btn-block">
+                      View cart
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

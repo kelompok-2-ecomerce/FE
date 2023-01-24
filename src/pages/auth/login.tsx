@@ -1,6 +1,9 @@
+
+import Layout from "../../components/Layout";
 import { Link, useNavigate } from "react-router-dom";
 
 import Layout from "../../components/layout";
+
 import imgLogin from "../../assets/imgLogin.svg";
 import logoApp from "../../assets/logoApp.svg";
 import Input from "../../components/input";
