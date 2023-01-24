@@ -1,9 +1,9 @@
+import ButtonLogin from "../components/buttonLogin";
+import InputProfil from "../components/inputProfil";
 import SideNav from "../components/sideNav";
 import Layout from "../components/layout";
 
 import Profil from "../assets/aboutmeProfil.svg";
-import InputProfil from "../components/inputProfil";
-import ButtonLogin from "../components/buttonLogin";
 
 const aboutmeProfil = () => {
   return (

@@ -7,7 +7,9 @@ import {
 import AboutmeProfil from "../pages/aboutmeProfil";
 import AboutmeAlamat from "../pages/aboutmeAlamat";
 import DeactivateAcc from "../pages/DeactivateAcc";
+import ProfilProduk from "../pages/profilProduk";
 import DetailBarang from "../pages/DetailBarang";
+import ProfilUpload from "../pages/profilUpload";
 import Register from "../pages/auth/register";
 import Transaksi from "../pages/transaksi";
 import Login from "../pages/auth/login";
@@ -18,6 +20,14 @@ function App() {
     {
       path: "/",
       element: <Homepage />,
+    },
+    {
+      path: "/profilUpload",
+      element: <ProfilUpload />,
+    },
+    {
+      path: "/profilProduk",
+      element: <ProfilProduk />,
     },
     {
       path: "/aboutmeProfil",
