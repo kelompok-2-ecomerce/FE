@@ -1,8 +1,16 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Homepage from "../pages/App";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
+
+import Register from "../pages/auth/register";
 import Login from "../pages/auth/login";
 import DeactivateAcc from "../pages/DeactivateAcc";
 import DetailBarang from "../pages/DetailBarang";
+
+import Homepage from "../pages/App";
+
 
 function App() {
   const router = createBrowserRouter([
@@ -17,11 +25,18 @@ function App() {
     {
       path: "/detailBarang",
       element: <DetailBarang />,
+
     },
     {
       path: "/deactivate",
       element: <DeactivateAcc />,
-    },
+      },
+      
+      {
+      path: "/register",
+      element: <Register />,
+      }, 
+
   ]);
 
   return <RouterProvider router={router} />;

@@ -14,7 +14,7 @@ const ButtonRegister: FC<ButtonProps> = ({ id, loading, label, ...props }) => {
       //   loading && "bg-[#029664] cursor-not-allowed"
       // } `}
       // disabled={loading}
-      // {...props}
+      {...props}
     >
       {label}
     </button>
