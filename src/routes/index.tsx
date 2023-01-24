@@ -1,15 +1,38 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Homepage from "../pages/App";
-import Login from "../pages/auth/login";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
+
+import AboutmeProfil from "../pages/aboutmeProfil";
+import AboutmeAlamat from "../pages/aboutmeAlamat";
 import DeactivateAcc from "../pages/DeactivateAcc";
 import DetailBarang from "../pages/DetailBarang";
+
 import ShoppingCart from "../pages/ShoppingCart";
+import Register from "../pages/auth/register";
+import Transaksi from "../pages/transaksi";
+import Login from "../pages/auth/login";
+import Homepage from "../pages/App";
+
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Homepage />,
+    },
+    {
+      path: "/aboutmeProfil",
+      element: <AboutmeProfil />,
+    },
+    {
+      path: "/aboutmeAlamat",
+      element: <AboutmeAlamat />,
+    },
+    {
+      path: "/transaksi",
+      element: <Transaksi />,
     },
     {
       path: "/login",
@@ -23,9 +46,13 @@ function App() {
       path: "/deactivate",
       element: <DeactivateAcc />,
     },
+
     {
       path: "/shoppingCart",
-      element: <ShoppingCart />,
+     element: <ShoppingCart />,
+    {
+      path: "/register",
+      element: <Register />,
     },
   ]);
 
