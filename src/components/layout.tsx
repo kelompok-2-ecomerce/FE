@@ -1,15 +1,19 @@
-import { ReactNode } from "react";
+import React, { FC } from "react";
+import Navbar from "./Navbar";
 
-interface props {
-  children: ReactNode;
+interface LayoutProps {
+  children: React.ReactNode;
 }
 
-function Layout({ children }: props) {
+const Layout: FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="w-full h-screen overflow-auto">
-      <div className="h-full w-full bg-base-100 overflow-auto">{children}</div>
-    </div>
+    <>
+      <div className="w-full h-screen flex flex-col overflow-auto bg-white">
+        <Navbar />
+        <div className="w-full min-h-screen ">{children}</div>
+      </div>
+    </>
   );
-}
+};
 
 export default Layout;

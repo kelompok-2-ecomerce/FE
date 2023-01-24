@@ -1,13 +1,15 @@
 import React from "react";
 import avatar from "../assets/avatar.webp";
 import trolley from "../assets/trolley.webp";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <>
       <div className="navbar bg-white shadow-md p-10">
         <div className="flex-1">
-          <a
+          <Link
+            to="/"
             className="btn btn-ghost normal-case text-2xl md:ml-24"
             style={{
               color: "#007549",
@@ -16,7 +18,7 @@ const Navbar = () => {
             }}
           >
             Greenish
-          </a>
+          </Link>
         </div>
         <div className="flex-none">
           <div className="dropdown dropdown-end">

@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { useNavigate } from "react-router";
 
 interface CardProps {
   title: string;
@@ -7,6 +8,11 @@ interface CardProps {
 }
 
 const CardHome: FC<CardProps> = ({ title, price, image }) => {
+  const navigate = useNavigate();
+
+  function onClickDetail() {
+    navigate(`/detailBarang`);
+  }
   return (
     <>
       <div className="md:w-11/12 mt-10 ">
@@ -15,6 +21,7 @@ const CardHome: FC<CardProps> = ({ title, price, image }) => {
             <img
               src={image}
               className="mx-auto rounded-3xl shadow-lg lg:h-72 lg:w-full"
+              onClick={() => onClickDetail()}
             />
           </div>
         </figure>
