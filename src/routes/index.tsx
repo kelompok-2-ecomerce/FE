@@ -1,15 +1,20 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Homepage from "../pages/Homepage";
+import Homepage from "../pages/App";
+import Login from "../pages/auth/login";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Homepage />,
-  },
-]);
+function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Homepage />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+  ]);
 
-const Index = () => {
   return <RouterProvider router={router} />;
-};
+}
 
-export default Index;
+export default App;
