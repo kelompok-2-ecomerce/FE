@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout";
 import imgLogin from "../../assets/imgLogin.svg";
 import logoApp from "../../assets/logoApp.svg";
 import Input from "../../components/input";
