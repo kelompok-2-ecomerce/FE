@@ -18,6 +18,7 @@ import pic13 from "../assets/pic-13.webp";
 const Content = () => {
   return (
     <>
+      {/* test */}
       <div className="w-full min-h-screen flex justify-center mt-10 ">
         <div className="w-10/12 ">
           <h1 className="text-green-700 font-bold text-2xl">

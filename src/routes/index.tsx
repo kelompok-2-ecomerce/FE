@@ -6,7 +6,10 @@ import {
 
 import Register from "../pages/auth/register";
 import Login from "../pages/auth/login";
+import DetailBarang from "../pages/DetailBarang";
+
 import Homepage from "../pages/App";
+
 
 function App() {
   const router = createBrowserRouter([
@@ -19,9 +22,13 @@ function App() {
       element: <Login />,
     },
     {
+      path: "/detailBarang",
+      element: <DetailBarang />,
+      },
+      {
       path: "/register",
       element: <Register />,
-    },
+      }, 
   ]);
 
   return <RouterProvider router={router} />;
