@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 
 interface CardProps {
@@ -20,7 +21,7 @@ const CardHome: FC<CardProps> = ({ title, price, image }) => {
           <div className="w-full">
             <img
               src={image}
-              className="mx-auto rounded-3xl shadow-lg lg:h-72 lg:w-full"
+              className="mx-auto rounded-3xl shadow-lg lg:h-64 lg:w-full"
               onClick={() => onClickDetail()}
             />
           </div>
@@ -34,7 +35,7 @@ const CardHome: FC<CardProps> = ({ title, price, image }) => {
           </div>
         </div>
         <button className="btn bg-green-700 border-none text-white font-semibold mt-3 rounded-xl hover:bg-green-900">
-          Add To cart
+          <Link to="/shoppingCart">Add To cart</Link>
         </button>
       </div>
     </>

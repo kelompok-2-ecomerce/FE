@@ -3,6 +3,7 @@ import Homepage from "../pages/App";
 import Login from "../pages/auth/login";
 import DeactivateAcc from "../pages/DeactivateAcc";
 import DetailBarang from "../pages/DetailBarang";
+import ShoppingCart from "../pages/ShoppingCart";
 
 function App() {
   const router = createBrowserRouter([
@@ -21,6 +22,10 @@ function App() {
     {
       path: "/deactivate",
       element: <DeactivateAcc />,
+    },
+    {
+      path: "/shoppingCart",
+      element: <ShoppingCart />,
     },
   ]);
 
