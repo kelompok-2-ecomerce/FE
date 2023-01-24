@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 
 import Register from "../pages/auth/register";
+import Transaksi from "../pages/transaksi";
 import Login from "../pages/auth/login";
 import Homepage from "../pages/App";
 
@@ -13,6 +14,10 @@ function App() {
     {
       path: "/",
       element: <Homepage />,
+    },
+    {
+      path: "/transaksi",
+      element: <Transaksi />,
     },
     {
       path: "/login",
