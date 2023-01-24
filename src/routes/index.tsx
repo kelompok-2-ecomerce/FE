@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "../pages/App";
 import Login from "../pages/auth/login";
+import DeactivateAcc from "../pages/DeactivateAcc";
 import DetailBarang from "../pages/DetailBarang";
 
 function App() {
@@ -16,6 +17,10 @@ function App() {
     {
       path: "/detailBarang",
       element: <DetailBarang />,
+    },
+    {
+      path: "/deactivate",
+      element: <DeactivateAcc />,
     },
   ]);
 
