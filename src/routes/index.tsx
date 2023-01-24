@@ -16,7 +16,6 @@ import Transaksi from "../pages/transaksi";
 import Login from "../pages/auth/login";
 import Homepage from "../pages/App";
 
-
 function App() {
   const router = createBrowserRouter([
     {
@@ -58,7 +57,8 @@ function App() {
 
     {
       path: "/shoppingCart",
-     element: <ShoppingCart />,
+      element: <ShoppingCart />,
+    },
     {
       path: "/register",
       element: <Register />,
