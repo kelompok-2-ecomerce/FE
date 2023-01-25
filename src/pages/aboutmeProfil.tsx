@@ -11,8 +11,6 @@ import SideNav from "../components/sideNav";
 import Layout from "../components/layout";
 import Navbar from "../components/Navbar";
 
-import Profil from "../assets/aboutmeProfil.svg";
-
 const aboutmeProfil = () => {
   const MySwal = withReactContent(Swal);
 
@@ -36,9 +34,12 @@ const aboutmeProfil = () => {
       .then((res) => {
         const { photo, name, email, phone_number } = res.data.data;
         // console.log(res.data);
-        // console.log(name);
-        // console.log(email);
-        // console.log(phoneNumber);
+        console.log(photo);
+        console.log(name);
+        console.log(email);
+        console.log(phoneNumber);
+
+        setPhoto(photo);
         setName(name);
         setEmail(email);
         setPhoneNumber(phone_number);
@@ -106,7 +107,7 @@ const aboutmeProfil = () => {
           <p className="text-[28px] text-[#355B3E] font-bold mb-3 ">About me</p>
           <img
             className="w-28 h-28 border-2 border-zinc-600 rounded-full "
-            src={Profil}
+            src={photo}
           />
 
           <form onSubmit={(e) => handleSubmit(e)}>
