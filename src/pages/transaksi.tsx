@@ -8,6 +8,7 @@ import Table from "../components/table";
 const Transaksi = () => {
   return (
     <Layout>
+      <Navbar />
       <div className="flex justify-center w-full">
         <div className="w-[80vw] py-7">
           <p className="text-[20px] font-bold text-[#355B3E] -ml-4">Checkout</p>

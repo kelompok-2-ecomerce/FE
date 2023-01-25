@@ -1,6 +1,6 @@
 import React from "react";
-
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import pic1 from "../assets/pic-1.webp";
 
@@ -9,6 +9,7 @@ import Layout from "../components/Layout";
 import Navbar from "../components/Navbar";
 
 const ShoppingCart = () => {
+  const navigate = useNavigate();
   const [jumlahBarang, setJumlahBarang] = useState(1);
 
   function countBarangPlus() {
@@ -36,7 +37,10 @@ const ShoppingCart = () => {
                 $299,99
               </p>
               <div className="pl-10 lg:pl-1">
-                <button className="btn bg-green-700 border-none text-white hover:bg-green-600 rounded-full pl-8 pr-8 mt-10">
+                <button
+                  className="btn bg-green-700 border-none text-white hover:bg-green-600 rounded-full pl-8 pr-8 mt-10"
+                  onClick={() => navigate("/transaksi")}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-shopping-cart"

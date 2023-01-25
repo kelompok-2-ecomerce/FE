@@ -1,10 +1,15 @@
+import { Link } from "react-router-dom";
+
 import CardHome from "../components/CardHome";
 import Layout from "../components/layout";
+
 import pic2 from "../assets/pic-2.webp";
+import Navbar from "../components/Navbar";
 
 const ProfilProduk = () => {
   return (
     <Layout>
+      <Navbar />
       <div className="flex w-full bg-[#355B3E] mt-7 py-6 px-28 gap-4">
         <img
           className="rounded-full w-24 h-24 border-2 border-zinc-50"
@@ -16,9 +21,11 @@ const ProfilProduk = () => {
         </p>
       </div>
       <div className="flex w-full pl-28 mt-10 mb-10">
-        <p className="px-5 py-1 text-[18px] text-[#355B3E] font-bold">Upload</p>
+        <p className="px-5 py-1 text-[18px] text-[#355B3E] font-bold">
+          <Link to="/profilUpload"> Upload </Link>
+        </p>
         <p className="inline ml-10 px-5 py-1 text-[18px] text-[#355B3E] font-bold border-b border-[#355B3E]">
-          Produk
+          <Link to="/profilProduk"> Produk </Link>
         </p>
       </div>
 
