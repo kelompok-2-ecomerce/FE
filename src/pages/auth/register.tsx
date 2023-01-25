@@ -16,7 +16,7 @@ const Register = () => {
         <div className="flex mt-10 w-[80vw] h-[80vh] overflow-hidden bg-zinc-50 rounded-2xl shadow-[0px_50px_40px_-30px_rgba(83,83,83,0.8)] ">
           <div className="w-[50%] h-full flex justify-center overflow-hidden">
             <div className="w-8/12 h-full py-5 ">
-              <Link to="/register">
+              <Link to="/">
                 <img className="mr-auto w-32" src={logoApp} alt="logoApp.svg" />
               </Link>
               <p className="text-[28px] text-center font-bold text-[#58745E] mt-4">

@@ -55,15 +55,24 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">Account</span>
-                </a>
-              </li>
+              <Link to="/profilProduk">
+                <li>
+                  <a className="justify-between">
+                    Profile
+                    <span className="badge">Account</span>
+                  </a>
+                </li>
+              </Link>
 
               <li>
-                <a>Logout</a>
+                <a>
+                  <Link to="/aboutmeProfil">About Me</Link>
+                </a>
+              </li>
+              <li>
+                <a>
+                  <Link to="/login">Login</Link>
+                </a>
               </li>
               <li>
                 <Link to="/deactivate">Deactivate Account</Link>

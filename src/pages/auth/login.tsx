@@ -32,7 +32,7 @@ const Login = () => {
 
           <div className="w-[50%] h-full flex justify-center overflow-hidden">
             <div className="w-8/12 h-full py-5 ">
-              <Link to="/register">
+              <Link to="/">
                 <img className="ml-auto w-32" src={logoApp} alt="logoApp.svg" />
               </Link>
               <p className="text-[28px] text-center font-bold text-[#58745E] mt-5">

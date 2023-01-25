@@ -2,12 +2,14 @@ import ButtonLogin from "../components/buttonLogin";
 import InputProfil from "../components/inputProfil";
 import SideNav from "../components/sideNav";
 import Layout from "../components/layout";
+import Navbar from "../components/Navbar";
 
 import Profil from "../assets/aboutmeProfil.svg";
 
 const aboutmeProfil = () => {
   return (
     <Layout>
+      <Navbar />
       <div className="flex w-full mt-5 py-7 overflow-hidden">
         <SideNav />
         <div className="flex flex-col items-center w-[60%] rounded-3xl border border-[rgba(53,91,62,0.8)] shadow-[4px_9px_20px_0px_rgba(83,83,83,0.5)] text-center p-5 pb-5 ml-28">

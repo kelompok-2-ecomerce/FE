@@ -1,12 +1,16 @@
+import { Link } from "react-router-dom";
+
 import ButtonRegister from "../components/buttonRegister";
+import InputProfil from "../components/inputProfil";
 import Layout from "../components/layout";
 
 import pic2 from "../assets/pic-2.webp";
-import InputProfil from "../components/inputProfil";
+import Navbar from "../components/Navbar";
 
 const ProfilUpload = () => {
   return (
     <Layout>
+      <Navbar />
       <div className="flex w-full bg-[#355B3E] mt-7 py-6 px-28 gap-4">
         <img
           className="rounded-full w-24 h-24 border-2 border-zinc-50"
@@ -19,10 +23,10 @@ const ProfilUpload = () => {
       </div>
       <div className="flex w-full pl-28 mt-10 mb-2">
         <p className="px-5 py-1 text-[18px] text-[#355B3E] font-bold border-b border-[#355B3E]">
-          Upload
+          <Link to="/profilUpload"> Upload </Link>
         </p>
         <p className="inline ml-10 px-5 py-1 text-[18px] text-[#355B3E] font-bold">
-          Produk
+          <Link to="/profilProduk">Produk</Link>
         </p>
       </div>
       <div className="flex w-full px-10 py-5 mb-16">
