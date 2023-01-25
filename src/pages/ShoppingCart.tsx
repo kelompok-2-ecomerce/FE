@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import pic1 from "../assets/pic-1.webp";
 
 import Footer from "../components/Footer";
-import Layout from "../components/Layout";
+import Layout from "../components/layout";
 import Navbar from "../components/Navbar";
 
 const ShoppingCart = () => {
@@ -23,7 +23,7 @@ const ShoppingCart = () => {
     <>
       <Layout>
         <div className="w-full min-h-screen flex flex-col overflow-auto bg-white">
-          {/* <Navbar /> */}
+          <Navbar />
           <div className="flex flex-col md:flex-row ">
             <div className="flex-1 mt-10 p-14 lg:p-0 ">
               <img src={pic1} className="mx-auto w-full lg:w-3/5 rounded-3xl" />

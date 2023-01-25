@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import Layout from "../components/Layout";
+import Layout from "../components/layout";
 
 import pic1 from "../assets/pic-1.webp";
 import payment1 from "../assets/payment-1.webp";
