@@ -10,14 +10,13 @@ import SideNav from "../components/sideNav";
 import Layout from "../components/layout";
 import Navbar from "../components/Navbar";
 
-import Profil from "../assets/aboutmeProfil.svg";
-
 const AboutmeAlamat = () => {
   const MySwal = withReactContent(Swal);
 
   const [objSubmit, setObjsubmit] = useState<AboutmeType>({});
   const [loading, setLoading] = useState<boolean>(true);
 
+  const [photo, setPhoto] = useState<string>("");
   const [address, setAddress] = useState<string>("");
 
   useEffect(() => {
@@ -30,8 +29,9 @@ const AboutmeAlamat = () => {
         "https://virtserver.swaggerhub.com/back-end-14-alterra/sosmed/1.0.0/users"
       )
       .then((res) => {
-        const { address } = res.data.data;
+        const { address, photo } = res.data.data;
         // console.log(address);
+        setPhoto(photo);
         setAddress(address);
       })
       .catch((err) => {
@@ -48,6 +48,7 @@ const AboutmeAlamat = () => {
     for (key in objSubmit) {
       formData.append(key, objSubmit[key]);
     }
+    console.log(formData);
 
     axios
       .put(
@@ -61,6 +62,7 @@ const AboutmeAlamat = () => {
       )
       .then((res) => {
         const { message } = res.data;
+        console.log(res.data);
         MySwal.fire({
           title: "Edis Succesfull",
           text: message,
@@ -94,7 +96,7 @@ const AboutmeAlamat = () => {
           <p className="text-[36px] text-[#355B3E] font-bold mb-3 ">About Me</p>
           <img
             className="w-28 h-28 border-2 border-zinc-600 rounded-full "
-            src={Profil}
+            src={photo}
           />
 
           <form onSubmit={(e) => handleSubmit(e)}>
