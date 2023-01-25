@@ -1,9 +1,34 @@
-import React from "react";
+import withReactContent from "sweetalert2-react-content";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, FC } from "react";
+import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+
+import { handleAuth } from "../utils/redux/reducer/reducer";
+import Swal from "../utils/swal";
+
 import avatar from "../assets/avatar.webp";
 import trolley from "../assets/trolley.webp";
-import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const MySwal = withReactContent(Swal);
+
+  const [cookie, , removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
+
+  const handleLogout = async () => {
+    removeCookie("token");
+    dispatch(handleAuth(false));
+    navigate("/login");
+    MySwal.fire({
+      title: "Log out Account",
+      text: "You have been logged out",
+      showCancelButton: false,
+    });
+  };
+
   return (
     <>
       <div className="navbar bg-white shadow-md p-5">
@@ -66,7 +91,13 @@ const Navbar = () => {
                 <Link to="/aboutmeProfil">About Me</Link>
               </li>
               <li>
-                <Link to="/login">Login</Link>
+                <button
+                  onClick={() =>
+                    checkToken ? handleLogout() : navigate("/login")
+                  }
+                >
+                  {checkToken ? "Log out" : "Log in"}
+                </button>
               </li>
               <li>
                 <Link to="/deactivate">Deactivate Account</Link>

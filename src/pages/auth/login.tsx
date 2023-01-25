@@ -1,14 +1,75 @@
-import Layout from "../../components/layout";
+import withReactContent from "sweetalert2-react-content";
 import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+
+import Swal from "../../utils/swal";
+import { handleAuth } from "../../utils/redux/reducer/reducer";
+
+import ButtonRegister from "../../components/buttonRegister";
+import ButtonLogin from "../../components/buttonLogin";
+import Layout from "../../components/layout";
+import Input from "../../components/input";
 
 import imgLogin from "../../assets/imgLogin.svg";
 import logoApp from "../../assets/logoApp.svg";
-import Input from "../../components/input";
-import ButtonRegister from "../../components/buttonRegister";
-import ButtonLogin from "../../components/buttonLogin";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [, setCookie] = useCookies(["token"]);
+
+  const MySwal = withReactContent(Swal);
+  const [disabled, setDisabled] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  useEffect(() => {
+    if (email && password) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [email, password]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
+    e.preventDefault();
+    const body = {
+      email,
+      password,
+    };
+    console.log(body); //console
+
+    axios
+      .post("https://projectfebe.online/login", body)
+      .then((res) => {
+        const { data, message } = res.data;
+        console.log(res.data); //console
+
+        setCookie("token", data.token, { path: "/" });
+        dispatch(handleAuth(true));
+        MySwal.fire({
+          title: "Succes",
+          text: message,
+          showCancelButton: false,
+        });
+        navigate("/profilProduk");
+      })
+      .catch((err) => {
+        const { data } = err.response;
+        MySwal.fire({
+          title: "Failed",
+          text: data.message,
+          showCancelButton: false,
+        });
+      })
+      .finally(() => setLoading(false));
+  };
 
   return (
     <Layout>
@@ -43,27 +104,31 @@ const Login = () => {
                 and more
               </p>
               <div className=" mt-10 px-7">
-                <p className="font-bold text-[#58745E] mb-1">Email</p>
+                <form onSubmit={(e) => handleSubmit(e)}>
+                  <p className="font-bold text-[#58745E] mb-1">Email</p>
 
-                <Input
-                  id="input"
-                  type="e-mail"
-                  placeholder="budijoko@gmail.com"
-                />
-
-                <p className="font-bold text-[#58745E] mt-5 mb-1">Password</p>
-                <Input
-                  id="input-password"
-                  type="password"
-                  placeholder="Password"
-                />
-                <div className=" mt-8 text-center">
-                  <ButtonLogin
-                    id="btn-login"
-                    label="Login"
-                    // loading = {loa}
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="budijoko@gmail.com"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
-                </div>
+
+                  <p className="font-bold text-[#58745E] mt-5 mb-1">Password</p>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <div className=" mt-8 text-center">
+                    <ButtonLogin
+                      id="login"
+                      label="Login"
+                      loading={loading || disabled}
+                    />
+                  </div>
+                </form>
               </div>
             </div>
           </div>
