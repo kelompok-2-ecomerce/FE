@@ -4,6 +4,9 @@ import {
   Navigate,
 } from "react-router-dom";
 
+import { useCookies } from "react-cookie";
+import axios from "axios";
+
 import AboutmeProfil from "../pages/aboutmeProfil";
 import AboutmeAlamat from "../pages/aboutmeAlamat";
 import DeactivateAcc from "../pages/DeactivateAcc";
@@ -16,7 +19,34 @@ import Transaksi from "../pages/transaksi";
 import Login from "../pages/auth/login";
 import Homepage from "../pages/App";
 
+axios.defaults.baseURL = "https://projectfebe.online/";
+
 function App() {
+  const [cookie, , removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
+
+  axios.interceptors.request.use(function (config) {
+    config.headers = config.headers ?? {};
+    config.headers.Authrization = `Bearer ${checkToken}`;
+    return config;
+  });
+
+  axios.interceptors.response.use(
+    function (response) {
+      return response;
+    },
+    function (error) {
+      const { data } = error.response;
+      if (
+        data === "Missing or malformed JWT" ||
+        [401, 403].includes(data.code)
+      ) {
+        removeCookie("token");
+      }
+      return Promise.reject(error);
+    }
+  );
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -24,27 +54,31 @@ function App() {
     },
     {
       path: "/profilUpload",
-      element: <ProfilUpload />,
+      element: checkToken ? <ProfilUpload /> : <Navigate to="/login" />,
     },
     {
       path: "/profilProduk",
-      element: <ProfilProduk />,
+      element: checkToken ? <ProfilProduk /> : <Navigate to="/login" />,
     },
     {
       path: "/aboutmeProfil",
-      element: <AboutmeProfil />,
+      element: checkToken ? <AboutmeProfil /> : <Navigate to="/login" />,
     },
     {
       path: "/aboutmeAlamat",
-      element: <AboutmeAlamat />,
+      element: checkToken ? <AboutmeAlamat /> : <Navigate to="/login" />,
     },
     {
       path: "/transaksi",
-      element: <Transaksi />,
+      element: checkToken ? <Transaksi /> : <Navigate to="/login" />,
+    },
+    {
+      path: "/register",
+      element: checkToken ? <Navigate to="/login" /> : <Register />,
     },
     {
       path: "/login",
-      element: <Login />,
+      element: checkToken ? <Navigate to="/profilProduk" /> : <Login />,
     },
     {
       path: "/detailBarang",
@@ -60,8 +94,8 @@ function App() {
       element: <ShoppingCart />,
     },
     {
-      path: "/register",
-      element: <Register />,
+      path: "*",
+      element: <Login />,
     },
   ]);
 

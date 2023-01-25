@@ -1,14 +1,71 @@
 import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-import Layout from "../../components/layout";
-import imgLogin from "../../assets/imgLogin.svg";
-import logoApp from "../../assets/logoApp.svg";
-import Input from "../../components/input";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "../../utils/swal";
+
 import ButtonRegister from "../../components/buttonRegister";
 import ButtonLogin from "../../components/buttonLogin";
+import Layout from "../../components/layout";
+import Input from "../../components/input";
+
+import imgLogin from "../../assets/imgLogin.svg";
+import logoApp from "../../assets/logoApp.svg";
 
 const Register = () => {
   const navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
+
+  const [disable, setDisable] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const [name, setName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+
+  useEffect(() => {
+    if (name && email && password) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+  }, [name, email, password]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
+    e.preventDefault();
+    const body = {
+      name,
+      email,
+      password,
+    };
+    console.log(body);
+
+    axios
+      .post("https://projectfebe.online/register", body)
+      .then((res) => {
+        const { data, message } = res.data;
+        console.log(res.data);
+        MySwal.fire({
+          title: "Succes",
+          text: message,
+          showCancelButton: false,
+        });
+        if (data) {
+          navigate("/login");
+        }
+      })
+      .catch((err) => {
+        const { message } = err.response.data;
+        MySwal.fire({
+          title: "Failed",
+          text: message,
+          showCancelButton: false,
+        });
+      })
+      .finally(() => setLoading(false));
+  };
 
   return (
     <Layout>
@@ -26,30 +83,40 @@ const Register = () => {
                 Create your Account and Enjoy Together
               </p>
               <div className=" mt-5 px-7">
-                <p className="font-bold text-[#58745E] mb-1">Name</p>
+                <form onSubmit={(e) => handleSubmit(e)}>
+                  <p className="font-bold text-[#58745E] mb-1">Name</p>
 
-                <Input id="input" type="e-mail" placeholder="Budi Joko" />
-
-                <p className="font-bold text-[#58745E] mt-3 mb-1">Email</p>
-                <Input
-                  id="input"
-                  type="e-mail"
-                  placeholder="budijoko@gmail.com"
-                />
-
-                <p className="font-bold text-[#58745E] mt-3 mb-1">Password</p>
-                <Input
-                  id="input-password"
-                  type="password"
-                  placeholder="Password"
-                />
-                <div className=" mt-5 text-center">
-                  <ButtonLogin
-                    id="btn-login"
-                    label="Login"
-                    // loading = {loa}
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="Budi Joko"
+                    onChange={(e) => setName(e.target.value)}
                   />
-                </div>
+
+                  <p className="font-bold text-[#58745E] mt-3 mb-1">Email</p>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="budijoko@gmail.com"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+
+                  <p className="font-bold text-[#58745E] mt-3 mb-1">Password</p>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+
+                  <div className=" mt-5 text-center">
+                    <ButtonLogin
+                      id="btn-login"
+                      label="Register"
+                      loading={loading || disable}
+                    />
+                  </div>
+                </form>
               </div>
             </div>
           </div>
