@@ -10,7 +10,7 @@ import Navbar from "../components/Navbar";
 const ProfilUpload = () => {
   return (
     <Layout>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="flex w-full bg-[#355B3E] mt-7 py-6 px-28 gap-4">
         <img
           className="rounded-full w-24 h-24 border-2 border-zinc-50"
