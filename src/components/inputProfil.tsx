@@ -5,7 +5,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
 }
 
-const Input = ({ placeholder, id, ...props }: Props) => {
+function InputProfil({ placeholder, id, ...props }: Props) {
   return (
     <input
       id={id}
@@ -15,6 +15,6 @@ const Input = ({ placeholder, id, ...props }: Props) => {
       {...props}
     />
   );
-};
+}
 
-export default Input;
+export default InputProfil;
