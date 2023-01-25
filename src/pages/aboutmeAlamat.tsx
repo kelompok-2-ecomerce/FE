@@ -1,5 +1,11 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+import withReactContent from "sweetalert2-react-content";
+import { AboutmeType } from "../utils/types/profile";
+import Swal from "../utils/swal";
+
 import ButtonLogin from "../components/buttonLogin";
-import InputProfil from "../components/inputProfil";
 import SideNav from "../components/sideNav";
 import Layout from "../components/layout";
 import Navbar from "../components/Navbar";
@@ -7,6 +13,78 @@ import Navbar from "../components/Navbar";
 import Profil from "../assets/aboutmeProfil.svg";
 
 const AboutmeAlamat = () => {
+  const MySwal = withReactContent(Swal);
+
+  const [objSubmit, setObjsubmit] = useState<AboutmeType>({});
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const [address, setAddress] = useState<string>("");
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  function fetchData() {
+    axios
+      .get(
+        "https://virtserver.swaggerhub.com/back-end-14-alterra/sosmed/1.0.0/users"
+      )
+      .then((res) => {
+        const { address } = res.data.data;
+        // console.log(address);
+        setAddress(address);
+      })
+      .catch((err) => {
+        alert(err);
+      })
+      .finally(() => setLoading(false));
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
+    e.preventDefault();
+    const formData = new FormData();
+    let key: keyof typeof objSubmit;
+    for (key in objSubmit) {
+      formData.append(key, objSubmit[key]);
+    }
+
+    axios
+      .put(
+        "https://virtserver.swaggerhub.com/back-end-14-alterra/sosmed/1.0.0/users",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((res) => {
+        const { message } = res.data;
+        MySwal.fire({
+          title: "Edis Succesfull",
+          text: message,
+          showCancelButton: false,
+        });
+        setObjsubmit({});
+      })
+      .catch((err) => {
+        const { data } = err.response;
+        MySwal.fire({
+          title: "Edit Failed",
+          text: data.message,
+          showCancelButton: false,
+        });
+      })
+      .finally(() => fetchData());
+  };
+
+  const handleChange = (value: string | File, key: keyof typeof objSubmit) => {
+    let temp = { ...objSubmit };
+    temp[key] = value;
+    setObjsubmit(temp);
+  };
+
   return (
     <Layout>
       <Navbar />
@@ -19,16 +97,21 @@ const AboutmeAlamat = () => {
             src={Profil}
           />
 
-          <div className="w-[30rem] mt-8 mb-8">
-            <p className="text-start font-bold mb-5 ">Daftar Alamat :</p>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div className="w-[30rem] mt-8 mb-8">
+              <p className="text-start font-bold mb-5 ">Daftar Alamat :</p>
+              <textarea
+                className="textarea w-full textarea-bordered pb-5"
+                id="addres"
+                typeof="text"
+                placeholder={address}
+                defaultValue={address}
+                onChange={(e) => handleChange(e.target.value, "address")}
+              ></textarea>
+            </div>
 
-            <textarea
-              className="textarea w-full textarea-bordered pb-5"
-              placeholder="Jl. Nusantara No.1 Kebomas, Garum, Kab.Blitar - Jawa TImur, ID 35464 ( Seberang Pom bensin kebomas, warna rumah cat hijau pagar hitam )"
-            ></textarea>
-          </div>
-
-          <ButtonLogin id="btn-submit" label="Save" />
+            <ButtonLogin id="btn-submit" label="Save" />
+          </form>
         </div>
       </div>
     </Layout>
