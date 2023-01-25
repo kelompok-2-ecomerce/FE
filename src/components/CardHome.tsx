@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 
@@ -23,17 +23,19 @@ const CardHome: FC<CardProps> = ({
   address,
   penjual,
 }) => {
+  const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
 
   function onClickDetail() {
-    navigate(`/detailBarang`);
+    navigate(`/detailBarang/${id}`);
   }
+
   return (
     <>
       <div className="md:w-11/12 mt-10 ">
         <figure>
           <div className="w-full">
-            <div className="badge border-none bg-green-700 lg:p-3 lg:z-1 lg:mt-4 lg:ml-36  lg:absolute text-white">
+            <div className="badge hidden border-none bg-green-700 lg:p-3 lg:z-1 lg:mt-4 lg:ml-36  lg:absolute text-white">
               Stok : {stok}
             </div>
             <img

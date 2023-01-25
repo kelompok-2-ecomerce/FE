@@ -1,12 +1,48 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import CardHome from "../components/CardHome";
 import Layout from "../components/layout";
 
 import pic2 from "../assets/pic-2.webp";
 import Navbar from "../components/Navbar";
+import { useCallback, useState } from "react";
+import axios from "axios";
+
+interface CardProps {
+  id: number;
+  name: string;
+  harga: number;
+  stok: number;
+  description: string;
+  image: string;
+  address: string;
+  penjual: string;
+}
 
 const ProfilProduk = () => {
+  const { id } = useParams();
+  const [post, setPost] = useState<CardProps[]>([]);
+
+  const fetchData = useCallback(() => {
+    axios({
+      method: "GET",
+      url: `https://projectfebe.online/products/${id}`,
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NzQ2NjIwMjgsInVzZXJJRCI6MjJ9.hZ6Im5HAdNv_Y1g5iS8I2EP-yOpo-IHu9EM7V33uXzQ",
+      },
+      params: {},
+    })
+      .then((response) => {
+        const ApiResponse = response.data;
+        console.log("response", ApiResponse);
+        setPost(ApiResponse.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <Layout>
       <Navbar />
@@ -31,11 +67,21 @@ const ProfilProduk = () => {
 
       <div className="w-full min-h-screen flex justify-center px-5 pb-20">
         <div className="w-full grid grid-cols-4   gap-2 px-6">
-          <CardHome image={pic2} title={"Shoes Max, Naiki"} price={"$22,99"} />
-          <CardHome image={pic2} title={"Shoes Max, Naiki"} price={"$22,99"} />
-          <CardHome image={pic2} title={"Shoes Max, Naiki"} price={"$22,99"} />
-          <CardHome image={pic2} title={"Shoes Max, Naiki"} price={"$22,99"} />
-          <CardHome image={pic2} title={"Shoes Max, Naiki"} price={"$22,99"} />
+          {post.map((item, idx) => {
+            return (
+              <CardHome
+                key={idx}
+                id={item.id}
+                image={item.image}
+                name={item.name}
+                harga={item.harga}
+                description={item.description}
+                stok={item.stok}
+                address={item.address}
+                penjual={item.penjual}
+              />
+            );
+          })}
         </div>
       </div>
     </Layout>

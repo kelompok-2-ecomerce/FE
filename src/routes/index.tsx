@@ -54,11 +54,11 @@ function App() {
     },
     {
       path: "/profilUpload",
-      element: checkToken ? <ProfilUpload /> : <Navigate to="/login" />,
+      element: <ProfilUpload />,
     },
     {
       path: "/profilProduk",
-      element: checkToken ? <ProfilProduk /> : <Navigate to="/login" />,
+      element: <ProfilProduk />,
     },
     {
       path: "/aboutmeProfil",
@@ -81,7 +81,7 @@ function App() {
       element: checkToken ? <Navigate to="/profilProduk" /> : <Login />,
     },
     {
-      path: "/detailBarang",
+      path: "/detailBarang/:id",
       element: <DetailBarang />,
     },
     {
