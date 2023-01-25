@@ -1,4 +1,6 @@
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout";
+import { Link, useNavigate } from "react-router-dom";
+
 import imgLogin from "../../assets/imgLogin.svg";
 import logoApp from "../../assets/logoApp.svg";
 import Input from "../../components/input";
@@ -6,6 +8,8 @@ import ButtonRegister from "../../components/buttonRegister";
 import ButtonLogin from "../../components/buttonLogin";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   return (
     <Layout>
       <div className="flex justify-center">
@@ -18,8 +22,8 @@ const Login = () => {
               </p>
               <div className=" mt-8 text-center">
                 <ButtonRegister
-                  id="btn-signUp"
                   label="Sign Up"
+                  onClick={() => navigate("/register")}
                   // loading = {loa}
                 />
               </div>
@@ -28,7 +32,9 @@ const Login = () => {
 
           <div className="w-[50%] h-full flex justify-center overflow-hidden">
             <div className="w-8/12 h-full py-5 ">
-              <img className="ml-auto w-32" src={logoApp} alt="logoApp.svg" />
+              <Link to="/">
+                <img className="ml-auto w-32" src={logoApp} alt="logoApp.svg" />
+              </Link>
               <p className="text-[28px] text-center font-bold text-[#58745E] mt-5">
                 Log in
               </p>
