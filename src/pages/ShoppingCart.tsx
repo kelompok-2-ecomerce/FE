@@ -1,7 +1,8 @@
-import React from "react";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import React from "react";
 
+import { TbShoppingCart } from "react-icons/tb";
 import pic1 from "../assets/pic-1.webp";
 
 import Footer from "../components/Footer";
@@ -41,7 +42,7 @@ const ShoppingCart = () => {
                   className="btn bg-green-700 border-none text-white hover:bg-green-600 rounded-full pl-8 pr-8 mt-10"
                   onClick={() => navigate("/transaksi")}
                 >
-                  <svg
+                  {/* <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="icon icon-tabler icon-tabler-shopping-cart"
                     width="24"
@@ -55,11 +56,13 @@ const ShoppingCart = () => {
                   >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0m13 0m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0m2 -2h-11v-14h-2m2 2l14 1l-1 7h-13"></path>
-                  </svg>
+                  </svg> */}
+
                   <span className="pl-3">Checkout</span>
                 </button>
               </div>
             </div>
+
             <div className="flex-1 -mt-14 lg:mt-0 p-10 lg:p-0">
               <div className="flex flex-row mt-7 ">
                 <p className="mt-10 font-bold text-xl mr-4">Qty:</p>
@@ -104,21 +107,8 @@ const ShoppingCart = () => {
               </p>
               <div className="pl-10 lg:pl-1">
                 <button className="btn bg-green-700 border-none text-white hover:bg-green-600 rounded-full pl-8 pr-8 mt-10">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-shopping-cart"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0m13 0m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0m2 -2h-11v-14h-2m2 2l14 1l-1 7h-13"></path>
-                  </svg>
+                  <TbShoppingCart />
+
                   <span className="pl-3">Checkout</span>
                 </button>
               </div>

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 import withReactContent from "sweetalert2-react-content";
 import { AboutmeType } from "../utils/types/profile";
@@ -13,6 +14,8 @@ import Navbar from "../components/Navbar";
 
 const aboutmeProfil = () => {
   const MySwal = withReactContent(Swal);
+  const [cookie, removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
 
   const [objSubmit, setObjSubmit] = useState<AboutmeType>({});
   const [loading, setLoading] = useState<boolean>(true);
@@ -28,16 +31,11 @@ const aboutmeProfil = () => {
 
   function fetchData() {
     axios
-      .get(
-        "https://virtserver.swaggerhub.com/back-end-14-alterra/sosmed/1.0.0/users"
-      )
+      .get("https://projectfebe.online/users", {
+        headers: { Authorization: `Bearer ${checkToken}` },
+      })
       .then((res) => {
-        const { photo, name, email, phone_number } = res.data.data;
-        // console.log(res.data);
-        console.log(photo);
-        console.log(name);
-        console.log(email);
-        console.log(phoneNumber);
+        const { data, photo, name, email, phone_number } = res.data.data;
 
         setPhoto(photo);
         setName(name);
@@ -45,10 +43,27 @@ const aboutmeProfil = () => {
         setPhoneNumber(phone_number);
       })
       .catch((err) => {
-        alert(err);
+        alert(err.toString());
       })
       .finally(() => setLoading(false));
   }
+
+  // function fetchData() {
+  //   axios
+  //     .get("https://projectfebe.online/users")
+  //     .then((res) => {
+  //       const { data, photo, name, email, phone_number } = res.data.data;
+
+  //       setPhoto(photo);
+  //       setName(name);
+  //       setEmail(email);
+  //       setPhoneNumber(phone_number);
+  //     })
+  //     .catch((err) => {
+  //       alert(err.toString());
+  //     })
+  //     .finally(() => setLoading(false));
+  // }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
@@ -62,15 +77,12 @@ const aboutmeProfil = () => {
     console.log(formData);
 
     axios
-      .put(
-        "https://virtserver.swaggerhub.com/back-end-14-alterra/sosmed/1.0.0/users",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .put("https://projectfebe.online/users", formData, {
+        headers: {
+          Authorization: `Bearer ${checkToken}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         const { message } = res.data;
         console.log(res.data); // console
@@ -118,8 +130,8 @@ const aboutmeProfil = () => {
                   <td className="item-center  rounded-full w-[15em]">
                     <input
                       className="w-full"
-                      type="file"
                       id="imgProfil"
+                      type="file"
                       name="img"
                       accept="image/*"
                     />
