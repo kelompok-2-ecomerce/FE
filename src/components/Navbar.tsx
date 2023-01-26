@@ -31,7 +31,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar bg-white shadow-md p-5">
+      <div className="navbar sticky top-0 bg-white shadow-md p-5">
         <div className="flex-1">
           <Link
             to="/"
@@ -59,7 +59,6 @@ const Navbar = () => {
             >
               <div className="card-body">
                 <span className="font-bold text-lg">8 Items</span>
-                <span className=" text-green-700">Subtotal: $999</span>
                 <div className="card-actions">
                   <button className="btn bg-green-700 border-none btn-block">
                     <Link to="/shoppingCart">View cart</Link>

@@ -26,6 +26,10 @@ const aboutmeProfil = () => {
   const [email, setEmail] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   function fetchData() {
     axios
       .get("https://projectfebe.online/users", {
@@ -45,23 +49,6 @@ const aboutmeProfil = () => {
       .finally(() => setLoading(false));
   }
 
-  // function fetchData() {
-  //   axios
-  //     .get("https://projectfebe.online/users")
-  //     .then((res) => {
-  //       const { data, photo, name, email, phone_number } = res.data.data;
-
-  //       setPhoto(photo);
-  //       setName(name);
-  //       setEmail(email);
-  //       setPhoneNumber(phone_number);
-  //     })
-  //     .catch((err) => {
-  //       alert(err.toString());
-  //     })
-  //     .finally(() => setLoading(false));
-  // }
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
     e.preventDefault();
@@ -80,7 +67,6 @@ const aboutmeProfil = () => {
       })
       .then((res) => {
         const { message } = res.data;
-        console.log(res.data); // console
         MySwal.fire({
           title: "Edit Succesfull",
           text: message,

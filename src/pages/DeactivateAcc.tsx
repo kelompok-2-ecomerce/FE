@@ -36,8 +36,6 @@ const DeactivateAcc = () => {
       });
   }
 
-  console.log(datas);
-
   function handleDelete(data: AboutmeType) {
     axios
       .delete("https://projectfebe.online/users", {
