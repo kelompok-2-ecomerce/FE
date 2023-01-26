@@ -74,11 +74,11 @@ function App() {
     },
     {
       path: "/register",
-      element: checkToken ? <Navigate to="/login" /> : <Register />,
+      element: <Register />,
     },
     {
       path: "/login",
-      element: checkToken ? <Navigate to="/profilProduk" /> : <Login />,
+      element: <Login />,
     },
     {
       path: "/detailBarang/:id",

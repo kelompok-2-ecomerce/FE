@@ -1,8 +1,63 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+import withReactContent from "sweetalert2-react-content";
+import { AboutmeType } from "../utils/types/profile";
+import Swal from "../utils/swal";
+
 import "../styles/Deact.css";
 
 const DeactivateAcc = () => {
+  const navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
+
+  const [cookie, removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
+
+  const [datas, setDatas] = useState<AboutmeType>({});
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  function fetchData() {
+    axios
+      .get("https://projectfebe.online/users", {
+        headers: { Authorization: `Bearer ${checkToken}` },
+      })
+      .then((res) => {
+        const { data } = res.data;
+        setDatas(data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
+
+  console.log(datas);
+
+  function handleDelete(data: AboutmeType) {
+    axios
+      .delete("https://projectfebe.online/users", {
+        headers: { Authorization: `Bearer ${checkToken}` },
+      })
+      .then((res) => {
+        const { data, message } = res.data;
+        setDatas(data);
+        MySwal.fire({
+          title: " Data was delet",
+          text: message,
+          showCancelButton: false,
+        });
+        navigate("/login");
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
+
   return (
     <>
       <div className="w-full bg-white h-screen flex flex-col justify-center mx-auto">
@@ -53,6 +108,7 @@ const DeactivateAcc = () => {
                   borderRadius: "10px",
                   marginTop: "1rem",
                 }}
+                onClick={() => handleDelete(datas)}
               >
                 Deactivate Account
               </button>
