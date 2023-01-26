@@ -13,8 +13,14 @@ interface CardProps {
   penjual: string;
 }
 
+interface DataCart {
+  product_id?: number;
+}
+
 const Content = () => {
   const [post, setPost] = useState<CardProps[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [inputTask, setInputTask] = useState<DataCart>({});
 
   const fetchData = useCallback(() => {
     axios({
@@ -36,6 +42,26 @@ const Content = () => {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  // const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   setLoading(true);
+  //   e.preventDefault();
+  //   const body = {
+  //     content: inputTask,
+  //   };
+
+  //   axios
+  //     .post(`https://projectfebe.online/carts/${product_id}`, body)
+  //     .then((res) => {
+  //       alert("Add to Cart");
+  //     })
+  //     .catch((err) => {
+  //       const { message } = err.response.data;
+  //       alert(message);
+  //     })
+  //     .finally(() => setLoading(false));
+  // };
+
   return (
     <>
       {/* test */}
