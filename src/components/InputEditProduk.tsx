@@ -5,7 +5,11 @@ interface ProdukEdit extends InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
 }
 
-function InputEditProduk({ placeholder, id, ...props }: ProdukEdit) {
+export default function InputEditProduk({
+  placeholder,
+  id,
+  ...props
+}: ProdukEdit) {
   return (
     <input
       id={id}

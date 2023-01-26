@@ -18,6 +18,7 @@ import Register from "../pages/auth/register";
 import Transaksi from "../pages/transaksi";
 import Login from "../pages/auth/login";
 import Homepage from "../pages/App";
+import EditProduk from "../pages/EditProduk";
 
 // axios.defaults.baseURL = "https://projectfebe.online/";
 
@@ -83,6 +84,10 @@ function App() {
     {
       path: "/detailBarang/:id",
       element: <DetailBarang />,
+    },
+    {
+      path: "/editProduk/:id",
+      element: <EditProduk />,
     },
     {
       path: "/deactivate",

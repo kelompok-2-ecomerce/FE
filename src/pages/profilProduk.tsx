@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import CardHome from "../components/CardHome";
 import Layout from "../components/layout";
 
-import pic2 from "../assets/pic-2.webp";
+import avatar from "../assets/avatar.webp";
 import Navbar from "../components/Navbar";
 import { useCallback, useState, useEffect } from "react";
 import axios from "axios";
@@ -22,7 +22,7 @@ interface CardProps {
 
 const ProfilProduk = () => {
   const [post, setPost] = useState<CardProps[]>([]);
-  const { id_product } = useParams();
+
   const [, setCookie] = useCookies(["token"]);
   const [cookie, removeCookie] = useCookies(["token"]);
   const checkToken = cookie.token;
@@ -40,6 +40,10 @@ const ProfilProduk = () => {
         const ApiResponse = response.data;
         console.log("response", ApiResponse);
         setPost(ApiResponse.data);
+
+        useEffect(() => {
+          fetchData();
+        }, [fetchData]);
       })
       .catch((error) => {
         console.log(error);
@@ -56,11 +60,11 @@ const ProfilProduk = () => {
       <div className="flex w-full bg-[#355B3E] mt-7 py-6 px-28 gap-4">
         <img
           className="rounded-full w-24 h-24 border-2 border-zinc-50"
-          src="https://placeimg.com/80/80/people"
+          src={avatar}
           alt="propfilLogo.html"
         />
         <p className="inline text-[30px] text-zinc-50 font-bold leading-[96px]">
-          Dianna Puspitasari
+          Welcome Back Greener
         </p>
       </div>
       <div className="flex w-full pl-28 mt-10 mb-10">
