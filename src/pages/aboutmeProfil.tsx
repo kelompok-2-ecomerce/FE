@@ -109,6 +109,11 @@ const aboutmeProfil = () => {
     setObjSubmit(temp);
   };
 
+  // cara ke-2
+  // const handleFileSelect = (event: any) => {
+  //   setPhoto(event);
+  // };
+
   return (
     <Layout>
       <Navbar />
@@ -130,13 +135,14 @@ const aboutmeProfil = () => {
                     <InputProfil
                       id="photo"
                       type="file"
-                      placeholder={photo}
+                      placeholder=""
                       onChange={(e) => {
                         if (!e.currentTarget.files) {
                           return;
                         }
                         setPhoto(URL.createObjectURL(e.currentTarget.files[0]));
-                        handleChange(e.currentTarget.files[0], "photo");
+                        handleChange(e.currentTarget.files[0], "image");
+                        // handleFileSelect(e.currentTarget.files[0]); cara ke-2
                       }}
                     />
                   </td>
