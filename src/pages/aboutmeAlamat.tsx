@@ -8,7 +8,7 @@ import Swal from "../utils/swal";
 
 import ButtonLogin from "../components/buttonLogin";
 import SideNav from "../components/sideNav";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import Navbar from "../components/Navbar";
 
 const AboutmeAlamat = () => {
