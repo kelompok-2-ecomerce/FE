@@ -7,7 +7,7 @@ import Swal from "../../utils/swal";
 
 import ButtonRegister from "../../components/buttonRegister";
 import ButtonLogin from "../../components/buttonLogin";
-import Layout from "../../components/Layout";
+import Layout from "../../components/layoutDasar";
 import Input from "../../components/input";
 
 import imgLogin from "../../assets/imgLogin.svg";

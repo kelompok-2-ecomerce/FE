@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import Layout from "../components/Layout";
+import Layout from "../components/layoutDasar";
 
 import payment1 from "../assets/payment-1.webp";
 import payment2 from "../assets/payment-2.webp";
