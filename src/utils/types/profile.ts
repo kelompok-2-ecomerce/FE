@@ -4,4 +4,5 @@ export interface AboutmeType {
   email?: string;
   phone_number?: string;
   address?: string;
+  image?: any;
 }

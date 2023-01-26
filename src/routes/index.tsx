@@ -3,7 +3,7 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
-
+import { useState, useEffect, useMemo } from "react";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 
@@ -20,7 +20,7 @@ import Login from "../pages/auth/login";
 import Homepage from "../pages/App";
 import EditProduk from "../pages/EditProduk";
 
-axios.defaults.baseURL = "https://projectfebe.online/";
+// axios.defaults.baseURL = "https://projectfebe.online/";
 
 function App() {
   const [cookie, , removeCookie] = useCookies(["token"]);
@@ -70,7 +70,7 @@ function App() {
       element: checkToken ? <AboutmeAlamat /> : <Navigate to="/login" />,
     },
     {
-      path: "/transaksi",
+      path: "/transaksi/:product_id",
       element: checkToken ? <Transaksi /> : <Navigate to="/login" />,
     },
     {

@@ -14,11 +14,16 @@ interface CardProps {
   penjual: string;
 }
 
+interface DataCart {
+  product_id?: number;
+}
+
 const Content = () => {
   const [post, setPost] = useState<CardProps[]>([]);
   const [isCompleted, setIsCompleted] = useState(false);
   const [index, setIndex] = useState(3);
   const initialPost = slice(post, 0, index);
+ 
 
   const fetchData = useCallback(() => {
     axios({
