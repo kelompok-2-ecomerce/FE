@@ -1,11 +1,54 @@
+import { useCookies } from "react-cookie";
+import { useState, useEffect } from "react";
+
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 import ButtonRegister from "../components/buttonRegister";
 import Layout from "../components/layout";
 import Navbar from "../components/Navbar";
 import Table from "../components/table";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
+interface dataType {
+  product_id?: number;
+  name?: string;
+  image?: any;
+  harga?: number;
+  qty?: number;
+  total_harga?: number;
+}
 
 const Transaksi = () => {
+  const { product_id } = useParams();
+  const [cookie, removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
+
+  const [nama, setNama] = useState<string>("");
+  const [noHp, setNoHp] = useState<string>("");
+  const [alamat, setAlamat] = useState<string>("");
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  function fetchData() {
+    axios
+      .get("https://projectfebe.online/users", {
+        headers: { Authorization: `Bearer ${checkToken}` },
+      })
+      .then((res) => {
+        const { name, phone_number, address } = res.data.data;
+        setNama(name);
+        setNoHp(phone_number);
+        setAlamat(address);
+      })
+      .catch((err) => {
+        alert(err.response);
+      });
+  }
+
+  console.log(nama);
   return (
     <Layout>
       <Navbar />
@@ -24,12 +67,10 @@ const Transaksi = () => {
               </tr>
               <tr>
                 <td className="font-bold text-zinc-800 text-[14px] leading-7">
-                  M Agung Cahya D <br /> 089567864490
+                  {nama} <br /> {noHp}
                 </td>
                 <td className="text-zinc-800 text-[14px] leading-7 tracking-wider">
-                  Jl. Nusantara No.1 Kebomas, Garum, Kab.Blitar - Jawa TImur, ID
-                  35464 ( Seberang Pom bensin kebomas, warna rumah cat hijau
-                  pagar hitam )
+                  {alamat}
                 </td>
               </tr>
             </tbody>

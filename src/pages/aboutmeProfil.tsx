@@ -36,7 +36,7 @@ const aboutmeProfil = () => {
         headers: { Authorization: `Bearer ${checkToken}` },
       })
       .then((res) => {
-        const { data, photo, name, email, phone_number } = res.data.data;
+        const { photo, name, email, phone_number } = res.data.data;
 
         setPhoto(photo);
         setName(name);
