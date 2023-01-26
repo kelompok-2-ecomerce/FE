@@ -27,7 +27,7 @@ export default function DetailBarang() {
   const { id } = useParams();
   const [cookie, removeCookie] = useCookies(["token"]);
   const checkToken = cookie.token;
-  const [data, setData] = useState<CardProps | null>(null);
+  const [data, setData] = useState<CardProps | null>();
 
   const fetchData = useCallback(() => {
     axios({

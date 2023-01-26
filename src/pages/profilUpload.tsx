@@ -28,8 +28,9 @@ const ProfilUpload = () => {
 
   const MySwal = withReactContent(Swal);
   const [name, setName] = useState<string>("");
-  const [stok, setStok] = useState<number | null>(null);
-  const [harga, setHarga] = useState<number | null>(null);
+  const [stok, setStok] = useState<number | null>();
+  const [harga, setHarga] = useState<number | null>();
+  const [alamat, setAlamat] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [image, setImage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -110,27 +111,6 @@ const ProfilUpload = () => {
         </p>
       </div>
       <div className="flex w-full px-10 py-5 mb-16">
-        <div className="w-[30%] px-14 pt-6">
-          <img
-            className="w-[240px] h-[300px] rounded-2xl"
-            src={pic2}
-            alt="uploadImage"
-          />
-          <input
-            type="file"
-            className="file-input w-full max-w-xs mt-5"
-            onChange={(e) => {
-              if (!e.currentTarget.files) {
-                return;
-              }
-              setImage(URL.createObjectURL(e.currentTarget.files[0]));
-              handleChange(e.currentTarget.files[0], "image");
-            }}
-          />
-          <div>
-            {selectedFile && `${selectedFile.name} - ${selectedFile.type}`}
-          </div>
-        </div>
         <div className="w-[70%] px-5">
           <p className="text-[18px] text-zinc-900 font-bold">
             Keterangan Produk :
@@ -173,6 +153,18 @@ const ProfilUpload = () => {
                 onChange={(e) => setStok(parseInt(e.target.value))}
               />
             </div>
+            <div className="flex mt-5">
+              <p className="w-48 leading-[45px]">
+                Alamat <span className="ml-14">:</span>
+              </p>
+              <InputProfil
+                className="w-[60%] border border-zinc-700 p-2 rounded-xl"
+                id="input_name"
+                type="string"
+                placeholder="Shoes Max, Naiki"
+                onChange={(e) => setAlamat(e.target.value)}
+              />
+            </div>
 
             <div className="flex mt-5">
               <p className="w-48 leading-[45px]">
@@ -183,6 +175,20 @@ const ProfilUpload = () => {
                 placeholder="Harga murah kualitas tidak murahan ya"
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
+            </div>
+            <input
+              type="file"
+              className="file-input w-full max-w-xs mt-5"
+              onChange={(e) => {
+                if (!e.currentTarget.files) {
+                  return;
+                }
+                setImage(URL.createObjectURL(e.currentTarget.files[0]));
+                handleChange(e.currentTarget.files[0], "image");
+              }}
+            />
+            <div>
+              {selectedFile && `${selectedFile.name} - ${selectedFile.type}`}
             </div>
             <div className="w-[84%] text-right mt-10">
               <ButtonRegister
