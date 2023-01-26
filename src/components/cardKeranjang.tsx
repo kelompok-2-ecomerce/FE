@@ -46,7 +46,7 @@ const CardKeranjang: FC<cardProps> = ({
           {name}
         </h1>
         <p className="text-black font-bold text-3xl pl-14 lg:pl-0 mt-5 lg:mt-5 ">
-          {harga}
+          {`Rp.${harga},-`}
         </p>
         <div className="pl-10 lg:pl-1">
           <button
@@ -58,10 +58,10 @@ const CardKeranjang: FC<cardProps> = ({
           </button>
         </div>
       </div>
-      <div className="flex-1 -mt-14 lg:mt-0 p-10 lg:p-0">
+      <div className="flex-1 ml-8 -mt-14 lg:mt-0 p-10 lg:p-0">
         <div className="flex flex-row mt-7 ">
-          <p className="mt-10 font-bold text-xl mr-4">{`Qty : ${qty}`}</p>
-          <div className="btn-group mt-8">
+          <p className="mt-10 bg-[#355B3E] p-1 px-2 rounded-xl text-zinc-50 font-bold text-xl mr-4">{`Stock : ${qty}`}</p>
+          {/* <div className="btn-group mt-8">
             {jumlahBarang === 1 ? (
               <button
                 disabled
@@ -80,10 +80,10 @@ const CardKeranjang: FC<cardProps> = ({
             <button className="btn" onClick={() => countBarangPlus()}>
               +
             </button>
-          </div>
+          </div> */}
         </div>
         <p className="font-bold text-xl mt-5">
-          {`Sub Total: Rp.${total_harga} `}{" "}
+          {`Sub Total: Rp.${total_harga},- `}
         </p>
         <button className="btn bg-white mt-5 border-green-700 text-green-700 border-2 hover:text-white hover:bg-green-600 hover:border-green-600 rounded-xl pl-8 pr-8">
           Remove

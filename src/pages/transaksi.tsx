@@ -48,7 +48,6 @@ const Transaksi = () => {
       });
   }
 
-  console.log(nama);
   return (
     <Layout>
       <Navbar />

@@ -38,7 +38,7 @@ const ProfilProduk = () => {
     })
       .then((response) => {
         const ApiResponse = response.data;
-        console.log("response", ApiResponse);
+        // alert("response", ApiResponse);
         setPost(ApiResponse.data);
 
         useEffect(() => {

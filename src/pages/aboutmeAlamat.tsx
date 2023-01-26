@@ -33,7 +33,6 @@ const AboutmeAlamat = () => {
       })
       .then((res) => {
         const { address, photo } = res.data.data;
-        // console.log(address);
         setPhoto(photo);
         setAddress(address);
       })
@@ -61,7 +60,7 @@ const AboutmeAlamat = () => {
       })
       .then((res) => {
         const { message } = res.data;
-        console.log(res.data);
+
         MySwal.fire({
           title: "Edis Succesfull",
           text: message,

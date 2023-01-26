@@ -51,12 +51,6 @@ export default function DetailBarang() {
     })
       .then((res) => {
         const { image, name, harga, stok, description } = res.data.data;
-        // console.log(res.data);
-        console.log(image);
-        console.log(name);
-        console.log(harga);
-        console.log(stok);
-        console.log(description);
 
         setImage(image);
         setName(name);
@@ -83,8 +77,6 @@ export default function DetailBarang() {
       formData.append(key, objSubmit[key]);
     }
 
-    console.log(formData);
-
     axios
       .put(`https://projectfebe.online/products/${id}`, formData, {
         headers: {
@@ -94,7 +86,7 @@ export default function DetailBarang() {
       })
       .then((res) => {
         const { message } = res.data;
-        console.log(res.data);
+
         MySwal.fire({
           title: "Edit Succesfull",
           text: message,

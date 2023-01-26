@@ -40,11 +40,11 @@ export default function DetailBarang() {
     })
       .then((response) => {
         const ApiResponse = response.data;
-        console.log("response", ApiResponse);
+        // alert("response", ApiResponse);
         setData(ApiResponse.data);
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   }, []);
 

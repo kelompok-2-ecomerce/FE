@@ -23,7 +23,6 @@ const Content = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [index, setIndex] = useState(3);
   const initialPost = slice(post, 0, index);
- 
 
   const fetchData = useCallback(() => {
     axios({
@@ -34,11 +33,11 @@ const Content = () => {
     })
       .then((response) => {
         const ApiResponse = response.data;
-        console.log("response", ApiResponse);
+        // alert("response", ApiResponse);
         setPost(ApiResponse.data);
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   }, []);
 
@@ -48,7 +47,7 @@ const Content = () => {
 
   const loadMore = () => {
     setIndex(index + 6);
-    console.log(index);
+
     if (index >= post.length) {
       setIsCompleted(true);
     } else {

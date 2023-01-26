@@ -48,7 +48,6 @@ const ProfilUpload = () => {
       description,
       image,
     };
-    console.log(body);
 
     axios
       .post("https://projectfebe.online/products", body, {
@@ -59,7 +58,6 @@ const ProfilUpload = () => {
       })
       .then((res) => {
         const { data, message } = res.data;
-        console.log(res.data);
 
         MySwal.fire({
           title: "Succes",
@@ -69,7 +67,7 @@ const ProfilUpload = () => {
       })
       .catch((err) => {
         const { message } = err.response.data;
-        console.log(message);
+
         MySwal.fire({
           title: "Failed",
           text: message,

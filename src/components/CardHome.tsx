@@ -54,7 +54,7 @@ const CardHome: FC<CardProps> = ({
         );
       }
     } catch (error) {
-      console.error(error);
+      alert(error);
     }
   };
 
