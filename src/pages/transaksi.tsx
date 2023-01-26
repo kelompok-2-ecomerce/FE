@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 import ButtonRegister from "../components/buttonRegister";
-import Layout from "../components/Layout";
+import Layout from "../components/layoutDasar";
 import Navbar from "../components/Navbar";
 import Table from "../components/table";
 import { useParams } from "react-router-dom";

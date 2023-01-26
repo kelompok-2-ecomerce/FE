@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import ButtonRegister from "../components/buttonRegister";
 import InputProfil from "../components/inputProfil";
-import Layout from "../components/Layout";
+import Layout from "../components/layoutDasar";
 
 import pic2 from "../assets/pic-2.webp";
 import Navbar from "../components/Navbar";

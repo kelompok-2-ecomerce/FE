@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 
 import CardHome from "../components/CardHome";
-import Layout from "../components/Layout";
+import Layout from "../components/layoutDasar";
 
 import avatar from "../assets/avatar.webp";
 import Navbar from "../components/Navbar";

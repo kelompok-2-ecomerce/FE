@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 
 import CardKeranjang from "../components/cardKeranjang";
 import Footer from "../components/Footer";
-import Layout from "../components/Layout";
+import Layout from "../components/layoutDasar";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 
