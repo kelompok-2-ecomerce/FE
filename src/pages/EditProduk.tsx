@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import withReactContent from "sweetalert2-react-content";
 
 import Navbar from "../components/Navbar";

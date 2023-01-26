@@ -9,9 +9,8 @@ import Swal from "../utils/swal";
 import ButtonLogin from "../components/buttonLogin";
 import InputProfil from "../components/inputProfil";
 import SideNav from "../components/sideNav";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import Navbar from "../components/Navbar";
-import { current } from "@reduxjs/toolkit";
 
 const aboutmeProfil = () => {
   const MySwal = withReactContent(Swal);
