@@ -11,6 +11,7 @@ import InputProfil from "../components/inputProfil";
 import SideNav from "../components/sideNav";
 import Layout from "../components/layout";
 import Navbar from "../components/Navbar";
+import { current } from "@reduxjs/toolkit";
 
 const aboutmeProfil = () => {
   const MySwal = withReactContent(Swal);
@@ -74,8 +75,6 @@ const aboutmeProfil = () => {
       formData.append(key, objSubmit[key]);
     }
 
-    console.log(formData);
-
     axios
       .put("https://projectfebe.online/users", formData, {
         headers: {
@@ -110,6 +109,11 @@ const aboutmeProfil = () => {
     setObjSubmit(temp);
   };
 
+  // cara ke-2
+  // const handleFileSelect = (event: any) => {
+  //   setPhoto(event);
+  // };
+
   return (
     <Layout>
       <Navbar />
@@ -128,12 +132,18 @@ const aboutmeProfil = () => {
                 <tr>
                   <td className="pl-16">Upload Image :</td>
                   <td className="item-center  rounded-full w-[15em]">
-                    <input
-                      className="w-full"
-                      id="imgProfil"
+                    <InputProfil
+                      id="photo"
                       type="file"
-                      name="img"
-                      accept="image/*"
+                      placeholder=""
+                      onChange={(e) => {
+                        if (!e.currentTarget.files) {
+                          return;
+                        }
+                        setPhoto(URL.createObjectURL(e.currentTarget.files[0]));
+                        handleChange(e.currentTarget.files[0], "image");
+                        // handleFileSelect(e.currentTarget.files[0]); cara ke-2
+                      }}
                     />
                   </td>
                 </tr>
