@@ -22,10 +22,6 @@ const aboutmeProfil = () => {
   const [email, setEmail] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   function fetchData() {
     axios
       .get(

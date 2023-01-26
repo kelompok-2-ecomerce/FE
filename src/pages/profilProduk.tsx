@@ -22,7 +22,7 @@ interface CardProps {
 
 const ProfilProduk = () => {
   const [post, setPost] = useState<CardProps[]>([]);
-  const { id_product } = useParams();
+
   const [, setCookie] = useCookies(["token"]);
   const [cookie, removeCookie] = useCookies(["token"]);
   const checkToken = cookie.token;
@@ -40,6 +40,10 @@ const ProfilProduk = () => {
         const ApiResponse = response.data;
         console.log("response", ApiResponse);
         setPost(ApiResponse.data);
+
+        useEffect(() => {
+          fetchData();
+        }, [fetchData]);
       })
       .catch((error) => {
         console.log(error);

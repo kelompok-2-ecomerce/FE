@@ -11,8 +11,15 @@ import axios from "axios";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import { useCookies } from "react-cookie";
-import { useDispatch } from "react-redux";
-import { handleAuth } from "../utils/redux/reducer/reducer";
+
+interface CardProps {
+  id?: number;
+  name?: string;
+  harga?: number;
+  stok?: number;
+  description?: string;
+  image?: any;
+}
 
 const ProfilUpload = () => {
   const [selectedFile, setSelectedFile] = useState<File>();
@@ -26,6 +33,7 @@ const ProfilUpload = () => {
   const [description, setDescription] = useState<string>("");
   const [image, setImage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [objSubmit, setObjSubmit] = useState<CardProps>({});
 
   const handleAddProduct = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
@@ -74,10 +82,10 @@ const ProfilUpload = () => {
     }
   };
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setSelectedFile(e.target.files[0]);
-    }
+  const handleChange = (value: string | File, key: keyof typeof objSubmit) => {
+    let temp = { ...objSubmit };
+    temp[key] = value;
+    setObjSubmit(temp);
   };
 
   return (
@@ -111,74 +119,79 @@ const ProfilUpload = () => {
           <input
             type="file"
             className="file-input w-full max-w-xs mt-5"
-            onChange={handleFileChange}
+            onChange={(e) => {
+              if (!e.currentTarget.files) {
+                return;
+              }
+              setImage(URL.createObjectURL(e.currentTarget.files[0]));
+              handleChange(e.currentTarget.files[0], "image");
+            }}
           />
           <div>
             {selectedFile && `${selectedFile.name} - ${selectedFile.type}`}
           </div>
         </div>
-      </div>
+        <div className="w-[70%] px-5">
+          <p className="text-[18px] text-zinc-900 font-bold">
+            Keterangan Produk :
+          </p>
+          <form onSubmit={(e) => handleAddProduct(e)}>
+            <div className="flex mt-8">
+              <p className="w-48 leading-[45px]">
+                Nama Produk <span className="ml-14">:</span>
+              </p>
+              <InputProfil
+                className="w-[60%] border border-zinc-700 p-2 rounded-xl"
+                id="input_name"
+                type="name"
+                placeholder="Shoes Max, Naiki"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
 
-      <div className="w-[70%] px-5">
-        <p className="text-[18px] text-zinc-900 font-bold">
-          Keterangan Produk :
-        </p>
-        <form onSubmit={(e) => handleAddProduct(e)}>
-          <div className="flex mt-8">
-            <p className="w-48 leading-[45px]">
-              Nama Produk <span className="ml-14">:</span>
-            </p>
-            <InputProfil
-              className="w-[60%] border border-zinc-700 p-2 rounded-xl"
-              id="input_name"
-              type="name"
-              placeholder="Shoes Max, Naiki"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
+            <div className="flex mt-5">
+              <p className="w-48 leading-[45px]">
+                Harga Produk <span className="ml-14">:</span>
+              </p>
+              <InputProfil
+                className="w-[60%] border border-zinc-700 p-2 rounded-xl"
+                id="input_name"
+                type="number"
+                placeholder="Shoes Max, Naiki"
+                onChange={(e) => setHarga(parseInt(e.target.value))}
+              />
+            </div>
+            <div className="flex mt-5">
+              <p className="w-48 leading-[45px]">
+                Stok <span className="ml-14">:</span>
+              </p>
+              <InputProfil
+                className="w-[60%] border border-zinc-700 p-2 rounded-xl"
+                id="input_name"
+                type="number"
+                placeholder="Shoes Max, Naiki"
+                onChange={(e) => setStok(parseInt(e.target.value))}
+              />
+            </div>
 
-          <div className="flex mt-5">
-            <p className="w-48 leading-[45px]">
-              Harga Produk <span className="ml-14">:</span>
-            </p>
-            <InputProfil
-              className="w-[60%] border border-zinc-700 p-2 rounded-xl"
-              id="input_name"
-              type="number"
-              placeholder="Shoes Max, Naiki"
-              onChange={(e) => setHarga(parseInt(e.target.value))}
-            />
-          </div>
-          <div className="flex mt-5">
-            <p className="w-48 leading-[45px]">
-              Stok <span className="ml-14">:</span>
-            </p>
-            <InputProfil
-              className="w-[60%] border border-zinc-700 p-2 rounded-xl"
-              id="input_name"
-              type="number"
-              placeholder="Shoes Max, Naiki"
-              onChange={(e) => setStok(parseInt(e.target.value))}
-            />
-          </div>
-
-          <div className="flex mt-5">
-            <p className="w-48 leading-[45px]">
-              Deskripsi Produk <span className="ml-9">:</span>
-            </p>
-            <textarea
-              className="textarea w-[60%] textarea-bordered pb-5 border-zinc-700"
-              placeholder="Harga murah kualitas tidak murahan ya"
-              onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
-          </div>
-          <div className="w-[84%] text-right mt-10">
-            <ButtonRegister
-              className="w-40 h-12 rounded-xl bg-[#007549] text-[16px] text-zinc-50"
-              label="Upload"
-            />
-          </div>
-        </form>
+            <div className="flex mt-5">
+              <p className="w-48 leading-[45px]">
+                Deskripsi Produk <span className="ml-9">:</span>
+              </p>
+              <textarea
+                className="textarea w-[60%] textarea-bordered pb-5 border-zinc-700"
+                placeholder="Harga murah kualitas tidak murahan ya"
+                onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
+            </div>
+            <div className="w-[84%] text-right mt-10">
+              <ButtonRegister
+                className="w-40 h-12 rounded-xl bg-[#007549] text-[16px] text-zinc-50"
+                label="Upload"
+              />
+            </div>
+          </form>
+        </div>
       </div>
     </Layout>
   );

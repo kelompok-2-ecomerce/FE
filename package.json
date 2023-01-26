@@ -12,6 +12,7 @@
     "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.2.4",
     "daisyui": "^2.47.0",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
@@ -23,6 +24,7 @@
     "sweetalert2-react-content": "^5.0.7"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.191",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^3.0.0",

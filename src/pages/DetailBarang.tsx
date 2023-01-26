@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
+import axios from "axios";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import Layout from "../components/layout";
 
-import pic1 from "../assets/pic-1.webp";
 import payment1 from "../assets/payment-1.webp";
 import payment2 from "../assets/payment-2.webp";
 import payment3 from "../assets/payment-3.webp";
 import payment4 from "../assets/payment-4.webp";
 import Navbar from "../components/Navbar";
+import { useCookies } from "react-cookie";
 
 interface CardProps {
   id: number;
@@ -23,16 +24,33 @@ interface CardProps {
 }
 
 export default function DetailBarang() {
-  const [data, setData] = useState<CardProps>();
-
   const { id } = useParams();
+  const [cookie, removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
+  const [data, setData] = useState<CardProps | null>(null);
+
+  const fetchData = useCallback(() => {
+    axios({
+      method: "GET",
+      url: `https://projectfebe.online/products/${id}`,
+      headers: {
+        Authorization: `Bearer ${checkToken}`,
+      },
+      params: {},
+    })
+      .then((response) => {
+        const ApiResponse = response.data;
+        console.log("response", ApiResponse);
+        setData(ApiResponse.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
-    fetch(`https://projectfebe.online/products/${id}`, { method: "GET" })
-      .then((res) => res.json())
-      .then((data) => setData(data))
-      .catch((err) => console.log(err));
-  }, [id]);
+    fetchData();
+  }, [fetchData]);
 
   const [jumlahBarang, setJumlahBarang] = useState(1);
 
