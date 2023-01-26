@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import ButtonRegister from "../components/buttonRegister";
 import InputProfil from "../components/inputProfil";
@@ -10,8 +10,15 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
+import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+import { handleAuth } from "../utils/redux/reducer/reducer";
 
 const ProfilUpload = () => {
+  const [selectedFile, setSelectedFile] = useState<File>();
+  const [cookie, removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
+
   const MySwal = withReactContent(Swal);
   const [name, setName] = useState<string>("");
   const [stok, setStok] = useState<number | null>(null);
@@ -23,6 +30,8 @@ const ProfilUpload = () => {
   const handleAddProduct = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
     e.preventDefault();
+    const formData = new FormData();
+
     const body = {
       name,
       stok,
@@ -35,13 +44,14 @@ const ProfilUpload = () => {
     axios
       .post("https://projectfebe.online/products", body, {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NzQ2NjIwMjgsInVzZXJJRCI6MjJ9.hZ6Im5HAdNv_Y1g5iS8I2EP-yOpo-IHu9EM7V33uXzQ",
+          Authorization: `Bearer ${checkToken}`,
+          "Content-Type": "multipart/form-data",
         },
       })
       .then((res) => {
         const { data, message } = res.data;
         console.log(res.data);
+
         MySwal.fire({
           title: "Succes",
           text: message,
@@ -50,6 +60,7 @@ const ProfilUpload = () => {
       })
       .catch((err) => {
         const { message } = err.response.data;
+        console.log(message);
         MySwal.fire({
           title: "Failed",
           text: message,
@@ -57,7 +68,18 @@ const ProfilUpload = () => {
         });
       })
       .finally(() => setLoading(false));
+
+    if (!selectedFile) {
+      return;
+    }
   };
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
   return (
     <Layout>
       <Navbar />
@@ -89,73 +111,74 @@ const ProfilUpload = () => {
           <input
             type="file"
             className="file-input w-full max-w-xs mt-5"
-            // onChange={handleFileChange}
+            onChange={handleFileChange}
           />
-          {/* <div>{image && `${image.name} - ${image.type}`}</div>
-        </div> */}
+          <div>
+            {selectedFile && `${selectedFile.name} - ${selectedFile.type}`}
+          </div>
         </div>
+      </div>
 
-        <div className="w-[70%] px-5">
-          <p className="text-[18px] text-zinc-900 font-bold">
-            Keterangan Produk :
-          </p>
-          <form onSubmit={(e) => handleAddProduct(e)}>
-            <div className="flex mt-8">
-              <p className="w-48 leading-[45px]">
-                Nama Produk <span className="ml-14">:</span>
-              </p>
-              <InputProfil
-                className="w-[60%] border border-zinc-700 p-2 rounded-xl"
-                id="input_name"
-                type="name"
-                placeholder="Shoes Max, Naiki"
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
+      <div className="w-[70%] px-5">
+        <p className="text-[18px] text-zinc-900 font-bold">
+          Keterangan Produk :
+        </p>
+        <form onSubmit={(e) => handleAddProduct(e)}>
+          <div className="flex mt-8">
+            <p className="w-48 leading-[45px]">
+              Nama Produk <span className="ml-14">:</span>
+            </p>
+            <InputProfil
+              className="w-[60%] border border-zinc-700 p-2 rounded-xl"
+              id="input_name"
+              type="name"
+              placeholder="Shoes Max, Naiki"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
 
-            <div className="flex mt-5">
-              <p className="w-48 leading-[45px]">
-                Harga Produk <span className="ml-14">:</span>
-              </p>
-              <InputProfil
-                className="w-[60%] border border-zinc-700 p-2 rounded-xl"
-                id="input_name"
-                type="number"
-                placeholder="Shoes Max, Naiki"
-                onChange={(e) => setHarga(parseInt(e.target.value))}
-              />
-            </div>
-            <div className="flex mt-5">
-              <p className="w-48 leading-[45px]">
-                Stok <span className="ml-14">:</span>
-              </p>
-              <InputProfil
-                className="w-[60%] border border-zinc-700 p-2 rounded-xl"
-                id="input_name"
-                type="number"
-                placeholder="Shoes Max, Naiki"
-                onChange={(e) => setStok(parseInt(e.target.value))}
-              />
-            </div>
+          <div className="flex mt-5">
+            <p className="w-48 leading-[45px]">
+              Harga Produk <span className="ml-14">:</span>
+            </p>
+            <InputProfil
+              className="w-[60%] border border-zinc-700 p-2 rounded-xl"
+              id="input_name"
+              type="number"
+              placeholder="Shoes Max, Naiki"
+              onChange={(e) => setHarga(parseInt(e.target.value))}
+            />
+          </div>
+          <div className="flex mt-5">
+            <p className="w-48 leading-[45px]">
+              Stok <span className="ml-14">:</span>
+            </p>
+            <InputProfil
+              className="w-[60%] border border-zinc-700 p-2 rounded-xl"
+              id="input_name"
+              type="number"
+              placeholder="Shoes Max, Naiki"
+              onChange={(e) => setStok(parseInt(e.target.value))}
+            />
+          </div>
 
-            <div className="flex mt-5">
-              <p className="w-48 leading-[45px]">
-                Deskripsi Produk <span className="ml-9">:</span>
-              </p>
-              <textarea
-                className="textarea w-[60%] textarea-bordered pb-5 border-zinc-700"
-                placeholder="Harga murah kualitas tidak murahan ya"
-                onChange={(e) => setDescription(e.target.value)}
-              ></textarea>
-            </div>
-            <div className="w-[84%] text-right mt-10">
-              <ButtonRegister
-                className="w-40 h-12 rounded-xl bg-[#007549] text-[16px] text-zinc-50"
-                label="Upload"
-              />
-            </div>
-          </form>
-        </div>
+          <div className="flex mt-5">
+            <p className="w-48 leading-[45px]">
+              Deskripsi Produk <span className="ml-9">:</span>
+            </p>
+            <textarea
+              className="textarea w-[60%] textarea-bordered pb-5 border-zinc-700"
+              placeholder="Harga murah kualitas tidak murahan ya"
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+          </div>
+          <div className="w-[84%] text-right mt-10">
+            <ButtonRegister
+              className="w-40 h-12 rounded-xl bg-[#007549] text-[16px] text-zinc-50"
+              label="Upload"
+            />
+          </div>
+        </form>
       </div>
     </Layout>
   );

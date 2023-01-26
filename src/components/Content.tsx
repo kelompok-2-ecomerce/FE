@@ -1,20 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import CardHome from "./CardHome";
-import Card from "./CardHome";
-import pic1 from "../assets/pic-1.webp";
-import pic2 from "../assets/pic-2.webp";
-import pic3 from "../assets/pic-3.webp";
-import pic4 from "../assets/pic-4.webp";
-import pic5 from "../assets/pic-5.webp";
-import pic6 from "../assets/pic-6.webp";
-import pic7 from "../assets/pic-7.webp";
-import pic8 from "../assets/pic-8.webp";
-import pic9 from "../assets/pic-9.webp";
-import pic10 from "../assets/pic-10.webp";
-import pic11 from "../assets/pic-11.webp";
-import pic12 from "../assets/pic-12.webp";
-import pic13 from "../assets/pic-13.webp";
 
 interface CardProps {
   id: number;
@@ -33,7 +19,7 @@ const Content = () => {
   const fetchData = useCallback(() => {
     axios({
       method: "GET",
-      url: "https://projectfebe.online/products",
+      url: `https://projectfebe.online/products`,
       headers: {},
       params: {},
     })
@@ -58,7 +44,7 @@ const Content = () => {
           <h1 className="text-green-700 font-bold text-2xl">
             | Best Seller Products
           </h1>
-          <div className="grid sm: grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid sm: grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {post.map((item, idx) => {
               return (
                 <CardHome

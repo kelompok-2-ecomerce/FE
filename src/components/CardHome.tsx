@@ -1,6 +1,8 @@
 import React, { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 interface CardProps {
   id: number;
@@ -24,11 +26,35 @@ const CardHome: FC<CardProps> = ({
   penjual,
 }) => {
   const [imageUrl, setImageUrl] = useState("");
+  const [cookie, removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
+  const [post, setPost] = useState<CardProps[]>([]);
   const navigate = useNavigate();
 
   function onClickDetail() {
     navigate(`/detailBarang/${id}`);
   }
+
+  const handleDeleteProduct = async (id: Number) => {
+    try {
+      await axios.delete(`https://projectfebe.online/products/${id}`, {
+        headers: {
+          Authorization: `Bearer ${checkToken}`,
+        },
+      });
+      if (window.confirm("Are You Sure want to delete this products?")) {
+        const filterData = setPost((prevPost) =>
+          prevPost.filter((item) => item.id !== id)
+        );
+        localStorage.setItem(
+          "products",
+          JSON.stringify(post.filter((item) => item.id !== id))
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -69,6 +95,8 @@ const CardHome: FC<CardProps> = ({
         <button className="btn bg-green-700 border-none text-white font-semibold mt-3 rounded-xl hover:bg-green-900">
           <Link to="/shoppingCart">Add To cart</Link>
         </button>
+        <button>Edit</button>
+        <button onClick={() => handleDeleteProduct(id)}>Delete</button>
       </div>
     </>
   );

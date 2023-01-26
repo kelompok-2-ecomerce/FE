@@ -5,8 +5,9 @@ import Layout from "../components/layout";
 
 import pic2 from "../assets/pic-2.webp";
 import Navbar from "../components/Navbar";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 interface CardProps {
   id: number;
@@ -20,16 +21,18 @@ interface CardProps {
 }
 
 const ProfilProduk = () => {
-  const { id } = useParams();
   const [post, setPost] = useState<CardProps[]>([]);
+  const { id_product } = useParams();
+  const [, setCookie] = useCookies(["token"]);
+  const [cookie, removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
 
   const fetchData = useCallback(() => {
     axios({
       method: "GET",
-      url: `https://projectfebe.online/products/${id}`,
+      url: `https://projectfebe.online/myproducts`,
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NzQ2NjIwMjgsInVzZXJJRCI6MjJ9.hZ6Im5HAdNv_Y1g5iS8I2EP-yOpo-IHu9EM7V33uXzQ",
+        Authorization: `Bearer ${checkToken}`,
       },
       params: {},
     })
@@ -42,6 +45,10 @@ const ProfilProduk = () => {
         console.log(error);
       });
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return (
     <Layout>
@@ -66,7 +73,7 @@ const ProfilProduk = () => {
       </div>
 
       <div className="w-full min-h-screen flex justify-center px-5 pb-20">
-        <div className="w-full grid grid-cols-4   gap-2 px-6">
+        <div className="w-full grid grid-cols-3   gap-2 px-6">
           {post.map((item, idx) => {
             return (
               <CardHome
