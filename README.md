@@ -88,7 +88,7 @@ Mentutor are present as a forum for teachers to monitor their students both from
 Here is a working live demo - 
 <br />
 # 🎨 Prototype
-Here is the link for the UI design : shorturl.at/ikV12
+Here is the link for the UI design : https://www.figma.com/file/zwZgX3fWsdbgyMz8QgVACd/e-commerce?node-id=0%3A1&t=xSocce3LWh6cmnNh-0
 <img src="https://user-images.githubusercontent.com/102293238/214952492-ded0125b-a459-4810-a740-27cd6908e041.png">
 
 # Getting Started
