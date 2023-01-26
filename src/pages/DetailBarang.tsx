@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Layout from "../components/layout";
 
@@ -11,7 +11,29 @@ import payment3 from "../assets/payment-3.webp";
 import payment4 from "../assets/payment-4.webp";
 import Navbar from "../components/Navbar";
 
+interface CardProps {
+  id: number;
+  name: string;
+  harga: number;
+  stok: number;
+  description: string;
+  image: string;
+  address: string;
+  penjual: string;
+}
+
 export default function DetailBarang() {
+  const [data, setData] = useState<CardProps>();
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    fetch(`https://projectfebe.online/products/${id}`, { method: "GET" })
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
+  }, [id]);
+
   const [jumlahBarang, setJumlahBarang] = useState(1);
 
   function countBarangPlus() {
@@ -30,17 +52,14 @@ export default function DetailBarang() {
             <div className="flex flex-col md:flex-row">
               <div className="image flex-1 p-5 lg:p-10 mt-10">
                 <img
-                  src={pic1}
+                  src={data?.image}
                   className="mx-auto w-full lg:w-3/5 rounded-3xl"
                 />
               </div>
               <div className="image flex-1  mt-5 lg:mt-20 p-5 lg:p-1">
-                <h1 className="text-black font-bold text-4xl">
-                  Shoes Max, Naiki
-                </h1>
+                <h1 className="text-black font-bold text-4xl">{data?.name}</h1>
                 <p className="text-black font-medium text-lg mt-8 ">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod
+                  {data?.description}
                 </p>
                 <h1 className="text-black font-bold text-3xl mt-5">$299,99</h1>
                 <div className="btn-group mt-8">

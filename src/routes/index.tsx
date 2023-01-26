@@ -81,7 +81,7 @@ function App() {
       element: checkToken ? <Navigate to="/profilProduk" /> : <Login />,
     },
     {
-      path: "/detailBarang",
+      path: "/detailBarang/:id",
       element: <DetailBarang />,
     },
     {

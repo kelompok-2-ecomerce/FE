@@ -61,11 +61,9 @@ const Navbar = () => {
                 <span className="font-bold text-lg">8 Items</span>
                 <span className=" text-green-700">Subtotal: $999</span>
                 <div className="card-actions">
-                  <Link to="/shoppingCart">
-                    <button className="btn bg-green-700 border-none btn-block">
-                      View cart
-                    </button>
-                  </Link>
+                  <button className="btn bg-green-700 border-none btn-block">
+                    <Link to="/shoppingCart">View cart</Link>
+                  </button>
                 </div>
               </div>
             </div>
