@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 import withReactContent from "sweetalert2-react-content";
 import { AboutmeType } from "../utils/types/profile";
@@ -12,6 +13,8 @@ import Navbar from "../components/Navbar";
 
 const AboutmeAlamat = () => {
   const MySwal = withReactContent(Swal);
+  const [cookie, removeCookie] = useCookies(["token"]);
+  const checkToken = cookie.token;
 
   const [objSubmit, setObjsubmit] = useState<AboutmeType>({});
   const [loading, setLoading] = useState<boolean>(true);
@@ -25,9 +28,9 @@ const AboutmeAlamat = () => {
 
   function fetchData() {
     axios
-      .get(
-        "https://virtserver.swaggerhub.com/back-end-14-alterra/sosmed/1.0.0/users"
-      )
+      .get("https://projectfebe.online/users", {
+        headers: { Authorization: `Bearer ${checkToken}` },
+      })
       .then((res) => {
         const { address, photo } = res.data.data;
         // console.log(address);
@@ -48,18 +51,14 @@ const AboutmeAlamat = () => {
     for (key in objSubmit) {
       formData.append(key, objSubmit[key]);
     }
-    console.log(formData);
 
     axios
-      .put(
-        "https://virtserver.swaggerhub.com/back-end-14-alterra/sosmed/1.0.0/users",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .put("https://projectfebe.online/users", formData, {
+        headers: {
+          Authorization: `Bearer ${checkToken}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         const { message } = res.data;
         console.log(res.data);
@@ -112,7 +111,7 @@ const AboutmeAlamat = () => {
               ></textarea>
             </div>
 
-            <ButtonLogin id="btn-submit" label="Save" />
+            <ButtonLogin id="btn-submit" label="Save" loading={loading} />
           </form>
         </div>
       </div>
