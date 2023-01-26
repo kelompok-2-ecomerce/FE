@@ -69,7 +69,7 @@ function App() {
       element: checkToken ? <AboutmeAlamat /> : <Navigate to="/login" />,
     },
     {
-      path: "/transaksi/:post_id",
+      path: "/transaksi/:product_id",
       element: checkToken ? <Transaksi /> : <Navigate to="/login" />,
     },
     {

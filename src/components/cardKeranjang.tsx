@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { FC, useState } from "react";
 
 import { TbShoppingCart } from "react-icons/tb";
-import pic1 from "../assets/pic-1.webp";
 
 interface cardProps {
   product_id?: number;
@@ -33,7 +32,7 @@ const CardKeranjang: FC<cardProps> = ({
   }
 
   function onClikTransaksi() {
-    navigate(`/transaksi`);
+    navigate(`/transaksi/${product_id}`);
   }
 
   return (
@@ -52,7 +51,7 @@ const CardKeranjang: FC<cardProps> = ({
         <div className="pl-10 lg:pl-1">
           <button
             className="btn bg-green-700 border-none text-white hover:bg-green-600 rounded-full pl-8 pr-8 mt-10"
-            onClick={() => navigate(`/transaksi/1`)}
+            onClick={() => onClikTransaksi()}
           >
             <TbShoppingCart className="w-6 h-6" />
             <span className="pl-3">Checkout</span>

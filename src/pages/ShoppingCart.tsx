@@ -52,6 +52,7 @@ const ShoppingCart = () => {
             {datas.map((data) => (
               <CardKeranjang
                 key={data.product_id}
+                product_id={data.product_id}
                 image={data.image}
                 name={data.name}
                 qty={data.qty}
