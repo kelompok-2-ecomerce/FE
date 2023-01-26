@@ -40,21 +40,18 @@ const Register = () => {
       email,
       password,
     };
-    console.log(body);
 
     axios
       .post("https://projectfebe.online/register", body)
       .then((res) => {
         const { data, message } = res.data;
-        console.log(res.data);
         MySwal.fire({
           title: "Succes",
           text: message,
           showCancelButton: false,
         });
-        if (data) {
-          navigate("/login");
-        }
+
+        navigate("/login");
       })
       .catch((err) => {
         const { message } = err.response.data;

@@ -43,13 +43,11 @@ const Login = () => {
       email,
       password,
     };
-    console.log(body); //console
 
     axios
       .post("https://projectfebe.online/login", body)
       .then((res) => {
         const { data, message } = res.data;
-        console.log(res.data); //console
 
         setCookie("token", data.token, { path: "/" });
         dispatch(handleAuth(true));
@@ -58,7 +56,7 @@ const Login = () => {
           text: message,
           showCancelButton: false,
         });
-        navigate("/profilProduk");
+        navigate("/");
       })
       .catch((err) => {
         const { data } = err.response;
@@ -85,7 +83,6 @@ const Login = () => {
                 <ButtonRegister
                   label="Sign Up"
                   onClick={() => navigate("/register")}
-                  // loading = {loa}
                 />
               </div>
             </div>

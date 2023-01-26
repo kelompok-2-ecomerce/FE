@@ -79,7 +79,7 @@ const Navbar = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link to="/profilProduk" className="justify-between">
+                <Link to="/profilUpload" className="justify-between">
                   Profile
                   <span className="badge">Account</span>
                 </Link>
@@ -98,7 +98,13 @@ const Navbar = () => {
                 </button>
               </li>
               <li>
-                <Link to="/deactivate">Deactivate Account</Link>
+                <button
+                  onClick={() =>
+                    checkToken ? navigate("/deactivate") : navigate("/login")
+                  }
+                >
+                  {checkToken ? "Deactivate Account" : ""}
+                </button>
               </li>
             </ul>
           </div>
