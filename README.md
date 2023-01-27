@@ -145,7 +145,7 @@ npm run dev
 
  M Agung Cahya D :
 
-  [![GitHub](https://img.shields.io/badge/-Agung-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/agungcahya122) 
+  [![GitHub](https://img.shields.io/badge/-Agung-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/agungcahya122/e-commerce) 
 
  M. Gumilang Tamasakti:
 
